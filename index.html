@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOUNTICS-analytics on demand</title>
+    <link href="https://fonts.cdnfonts.com/css/saira" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0F2D40;
+            --secondary: #3DB2FF;
+            --text-color: #FFFFFF;
+            --active-color: #FFB830;
+            --border-color: #1C4D6C;
+            --container-max-width: 1440px;
+            --content-width: min(94%, 1440px);
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .page-content {
+            background-color: var(--primary);
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--content-width);
+            margin: auto;
+        }
+
+        .theme-card {
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+        }
+
+        .theme-btn {
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 15px 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border-radius: 5px;
+            border-style: none;
+            font-weight: 600;
+            font-family: "Saira", Sans-serif;
+            font-size: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .section-heading {
+            padding-left: 40px;
+            border-left: 2px solid var(--active-color);
+            margin-bottom: 40px;
+            width: 50%;
+        }
+
+        .section-heading h2 {
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        .section-heading p {
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            font-size: 20px;
+            font-weight: 100;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .common-spacing {
+            padding-top: 100px;
+        }
+
+        /* common cards  */
+
+        .common-card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .common-card-container .common-card {
+            background-color: #1C4D6C;
+            border: 2px solid #206794;
+            border-radius: 15px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: center;
+            width: calc(33.33% - 58px);
+        }
+
+        .common-card-container .common-card h4 {
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            font-size: 30px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .common-card-container .common-card p {
+            font-weight: 300;
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            margin: 0;
+        }
+
+        /* header part  */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-image: linear-gradient(180deg, #0D2433 20%, var(--primary) 100%);
+            z-index: 1000;
+        }
+
+        .header .header-part {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-part .logo-part img {
+            width: 100px;
+        }
+
+        .header-part .toggle-button {
+            display: none;
+            padding: 5px;
+            background-color: #10415F;
+            border-radius: 10px;
+        }
+
+        .header-part .toggle-button img {
+            height: 30px;
+            width: 30px;
+        }
+
+        .toggle-button span {
+            background-color: red;
+            height: 3px;
+            width: 100%;
+            margin: 3px 0;
+        }
+
+        .header-part .link-part {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .header-part .link-part li {
+            list-style: none;
+        }
+
+        .header-part .link-part li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding: 13px 20px;
+        }
+
+        .header-part .link-part li.active a {
+            color: var(--active-color);
+            border-bottom: 1.5px solid var(--active-color);
+        }
+
+        .header-part .link-part li a:hover {
+            color: var(--active-color);
+            border-bottom: 1.5px solid var(--active-color);
+        }
+
+        /* banner part  */
+
+        .banner-section {
+            padding-top: 160px;
+        }
+
+        .banner-section .theme-card {
+            display: flex;
+            align-items: center;
+            padding: 0px 70px;
+        }
+
+        .banner-section .content-part {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-start;
+            width: 50%;
+            padding-right: 30px;
+        }
+
+        .banner-section .content-part h1 {
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .banner-section .content-part p:nth-child(2) {
+            color: #FFFFFFCC;
+            font-family: "Saira", Sans-serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .banner-section .content-part p:nth-child(3) {
+            color: #FFFFFFB3;
+            font-family: "Saira", Sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .banner-section .content-part button img {
+            height: 1em;
+            width: 1em;
+        }
+
+        .banner-section .img-part {
+            width: 50%;
+        }
+
+        .banner-section .img-part img {
+            width: 100%;
+            height: auto;
+            margin: -20px 0px;
+        }
+
+        .banner-section .theme-btn:hover{
+            background-color: #6DC5FF;
+        }
+
+        /* services section  */
+
+        .services-section .service-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .services-section .service-card {
+            background-image: linear-gradient(180deg, #1C4D6C 0%, #1C4D6C00 100%);
+            padding: 40px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-section .service-card::before {
+            content: '';
+            position: absolute;
+            background-repeat: no-repeat;
+            z-index: 100;
+            height: 60px;
+            width: 60px;
+            bottom: -20px;
+            right: -20px;
+        }
+
+        .service-card:nth-child(1)::before {
+            background-image: url('./standard.svg');
+        }
+
+        .service-card:nth-child(2)::before {
+            background-image: url('./additional.svg');
+        }
+
+        .services-section .service-card h3 {
+            font-family: "Saira", Sans-serif;
+            font-size: 34px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .service-card ul {
+            padding-left: 20px;
+            padding-top: 20px;
+        }
+
+        .service-card ul li {
+            font-family: "Saira", Sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: var(--text-color);
+            padding-bottom: 16px;
+            padding-left: 10px;
+        }
+
+        .service-card ul li::marker {
+            color: var(--active-color);
+        }
+
+        /* work section  */
+        .work-section .work-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .work-cards .work-card {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .work-cards .work-card:nth-child(odd) {
+            background-image: linear-gradient(270deg, #0B202E 0%, #102E42 100%);
+            border-width: 0px 10px 0px 0px;
+            border-style: solid;
+            border-color: #6EB3CB66;
+            border-radius: 0px 15px 15px 0px;
+        }
+
+        .work-cards .work-card:nth-child(odd) .img-part {
+            margin-right: 90px;
+        }
+
+        .work-cards .work-card:nth-child(even) {
+            background-image: linear-gradient(90deg, #0B202E 0%, #102E42 100%);
+            border-width: 0px 0px 0px 10px;
+            border-color: #6EB3CB66;
+            border-radius: 15px 0px 0px 15px;
+            flex-direction: row-reverse;
+            border-style: solid;
+        }
+
+        .work-cards .work-card:nth-child(even) .img-part {
+            margin-left: 90px;
+        }
+
+        .work-cards .work-card .content-part {
+            background-color: #1C4D6C;
+            border: 2px solid var(--border-color);
+            padding: 40px;
+            border-radius: 15px;
+            width: 33.33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #206794;
+            border-radius: 15px;
+            height: 100%;
+            gap: 30px;
+        }
+
+        .work-cards .work-card .content-part h3 {
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+            font-size: 34px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .work-cards .work-card .content-part p {
+            font-family: "Saira", Sans-serif;
+            font-weight: 300;
+            line-height: 1.2em;
+            color: var(--text-color);
+            text-align: left;
+        }
+
+        .work-card .number-label {
+            height: 70px;
+            width: 70px;
+            background-color: #D9D9D9;
+            font-weight: 700;
+            color: #000000;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-family: "Saira", Sans-serif;
+        }
+
+        /* tools section  */
+
+        .tools-section .common-card-container .common-card:last-child {
+            opacity: 0.5;
+        }
+
+        /* contact-section  */
+
+        .contact-section .contact-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-content .form-part {
+            width: 45%;
+        }
+
+        .contact-content .form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-content .form .input-grid {
+            display: flex;
+            gap: 40px;
+        }
+
+        .contact-content .form .form-input {
+            width: 100%;
+        }
+
+        .contact-content .form .form-input textarea {
+            background-color: #FFFFFF2B;
+            border-width: 0px 0px 0px 0px;
+            width: 100%;
+            padding: 6px 16px;
+            font-family: "Saira", Sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            color: var(--text-color);
+            max-width: -webkit-fill-available;
+            border-radius: 4px;
+        }
+
+        .contact-content .form .form-input textarea:focus {
+            outline: none;
+            border-width: 0;
+        }
+
+        .contact-content .form .form-input textarea::placeholder {
+            font-family: "Saira", Sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #afb9bf;
+        }
+
+        .contact-content .form .form-input input {
+            background-color: #FFFFFF2B;
+            border-width: 0;
+            width: 100%;
+            padding: 6px 16px;
+            font-family: "Saira", Sans-serif;
+            font-weight: 300;
+            font-size: 15px;
+            color: var(--text-color);
+            max-width: -webkit-fill-available;
+            min-height: 34px;
+            border-radius: 4px;
+        }
+
+        .contact-content .form .form-input input:focus {
+            border-width: 0;
+            outline: none;
+        }
+
+        .contact-content .form .form-input input::placeholder {
+            font-family: "Saira", Sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            color: #afb9bf;
+        }
+
+        .contact-content .form label {
+            padding-bottom: 8px;
+            font-family: "Saira", Sans-serif;
+            font-weight: 300;
+            color: var(--text-color);
+        }
+
+        .contact-content .form .theme-btn {
+            color: var(--text-color);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .contact-content .form .theme-btn:hover{
+            background-color: #247BB4;
+        }
+
+        .contact-content .img-part {
+            width: 50%;
+        }
+
+        .contact-content .img-part img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* footer part  */
+        .footer .theme-card {
+            padding: 70px 70px 20px 70px;
+        }
+
+        .footer-part {
+            display: flex;
+            padding-bottom: 20px;
+            gap: 40px;
+        }
+
+
+        .footer-part .footer-div {
+            width: 25%;
+        }
+
+        .footer-part .logo-part {
+            width: 20%;
+        }
+
+        .footer-part .logo-part img {
+            width: 135px;
+            height: 135px;
+        }
+
+        .footer-part .footer-div ul {
+            list-style: none;
+            padding-left: 0px;
+        }
+
+        .footer-part .footer-div ul li a {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-family: "Saira", Sans-serif;
+        }
+
+        .footer-part .footer-div .footer-text {
+            color: #FFFFFFCC;
+            font-size: 16px;
+            font-weight: 400;
+            font-family: "Saira", Sans-serif;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        .footer-part .footer-div .address-text {
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: "Saira", Sans-serif;
+            padding-top: 20px;
+            width: 70%;
+        }
+
+        .footer-part .social-media-part .img-part {
+            display: flex;
+            gap: 20px;
+            padding-top: 20px;
+        }
+
+        .copy-right-part {
+            border-top: 1px solid #FFFFFF14;
+            width: 100%;
+        }
+
+        .footer-part .footer-div ul li a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-part .footer-div ul li a:hover svg path{
+            fill: var(--secondary);
+        }
+
+        .copy-right-part p {
+            color: #FFFFFFB3;
+            font-size: 14px;
+            font-weight: 400;
+            font-family: "Saira", Sans-serif;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        /* modal css  */
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal .modal-content .contact-content .form-part {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .modal .modal-content {
+            background-color: #0f2d40;
+            padding: 20px 40px 40px 40px;
+            width: 100%;
+            max-width: 550px;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .modal .close-button {
+            color: var(--active-color);
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* media queries  */
+        @media only screen and (max-width: 1366px) {
+            .common-spacing {
+                padding-top: 60px;
+            }
+
+            .banner-section .content-part h1 {
+                font-size: 34px;
+            }
+
+            .banner-section .content-part p:nth-child(2) {
+                font-size: 18px;
+            }
+
+            .banner-section .content-part p:nth-child(3) {
+                font-size: 14px;
+            }
+
+            .banner-section .theme-card {
+                padding: 0px 40px;
+            }
+
+            .section-heading h2 {
+                font-size: 32px;
+            }
+
+            .section-heading p {
+                font-size: 16px;
+            }
+
+            .services-section .service-card h3 {
+                font-size: 30px;
+            }
+
+            .service-card ul li {
+                font-size: 16px;
+            }
+
+            .work-cards .work-card .content-part {
+                width: 46%;
+            }
+
+            .work-cards .work-card:nth-child(even) .img-part {
+                margin-left: 10px;
+            }
+
+            .work-cards .work-card:nth-child(odd) .img-part {
+                margin-right: 10px;
+            }
+
+            .work-cards .work-card .content-part {
+                padding: 40px 20px;
+            }
+
+            .footer-part .footer-div ul li a {
+                font-size: 20px;
+                margin-top: 6px;
+            }
+
+            .footer .theme-card {
+                padding: 40px 40px 10px 40px;
+            }
+
+        }
+
+        @media only screen and (max-width: 1025px) {
+            .common-card-container .common-card {
+                width: calc(50% - 58px);
+            }
+
+            .banner-section .img-part {
+                width: 70%;
+                margin: auto;
+            }
+
+            .banner-section .content-part {
+                width: 100%;
+            }
+
+            .banner-section .theme-card {
+                padding: 0px 40px 40px 40px;
+                flex-direction: column-reverse;
+                align-items: flex-start;
+            }
+
+            .work-card .img-part {
+                display: flex;
+                justify-content: center;
+            }
+
+            .work-card .img-part img {
+                width: 90%;
+            }
+
+            .work-cards .work-card .content-part {
+                gap: 20px;
+            }
+
+            .common-card-container .common-card h4 {
+                font-size: 24px;
+            }
+
+            .section-heading {
+                width: 64%;
+            }
+
+            .contact-section .contact-content {
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+
+            .contact-content .img-part {
+                width: 70%;
+            }
+
+            .contact-section .form-part {
+                width: 98%;
+            }
+
+            .footer-part {
+                flex-wrap: wrap;
+            }
+
+            .footer-part .footer-div {
+                width: 35%;
+            }
+
+            .footer-part .logo-part {
+                width: 35%;
+            }
+
+            .footer-part .footer-div .address-text {
+                padding-top: 0;
+            }
+
+            .footer-part .social-media-part .img-part {
+                padding-top: 0px;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .common-card-container .common-card {
+                width: 100%;
+            }
+
+            .header {
+                padding: 10px 0;
+            }
+
+            .header-part .link-part {
+                display: none;
+            }
+
+            .header-part .toggle-button {
+                display: flex;
+            }
+
+            .header-part .link-part {
+                display: none;
+            }
+
+            .header-part .link-part.show {
+                display: flex;
+                flex-direction: column;
+                width: auto;
+                position: absolute;
+                top: 88px;
+                background: #163f5a;
+                right: 3%;
+                z-index: 100;
+                padding-left: 0;
+                border-radius: 10px;
+                min-width: 200px;
+            }
+
+            .header-part .link-part li {
+                padding: 10px 20px;
+            }
+
+            .header-part .link-part li.active a {
+                color: var(--text-color);
+                border-bottom: none;
+            }
+
+            .header-part .link-part li.active {
+                background-color: #0B212F;
+            }
+
+            .header-part .link-part li a {
+                padding: 0;
+            }
+
+            .link-part li:first-child {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+            }
+
+            .link-part li:last-child {
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+            }
+
+            .header-part .logo-part img {
+                width: 80px;
+            }
+
+            .banner-section {
+                padding-top: 130px;
+            }
+
+            .banner-section .content-part h1 {
+                font-size: 26px;
+            }
+
+            .banner-section .theme-card {
+                padding: 0px 20px 20px 20px;
+            }
+
+            .banner-section .img-part {
+                width: 100%;
+            }
+
+            .services-section .service-card h3 {
+                font-size: 24px;
+            }
+
+            .service-card ul li {
+                font-size: 14px;
+            }
+
+            .services-section .service-card {
+                padding: 30px 20px;
+            }
+
+            .services-section .service-card::before {
+                bottom: -16px;
+                right: -16px;
+            }
+
+            .work-cards .work-card .content-part h3 {
+                font-size: 24px;
+            }
+
+            .work-cards .work-card .content-part {
+                gap: 16px;
+            }
+
+            .services-section .service-cards {
+                gap: 40px;
+                flex-wrap: wrap;
+            }
+
+            .work-cards .work-card .content-part {
+                width: 94%;
+            }
+
+            .work-cards .work-card {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 40px;
+                padding-bottom: 40px;
+            }
+
+            .work-cards .work-card:nth-child(even) {
+                border-width: 0 0 10px 0;
+                border-radius: 0 0 15px 15px;
+                flex-direction: column;
+            }
+
+            .work-cards .work-card:nth-child(odd) {
+                border-width: 0px 0px 10px 0px;
+                border-radius: 0px 0px 15px 15px;
+            }
+
+            .common-card-container .common-card {
+                min-height: 180px;
+            }
+
+            .contact-content .form .input-grid {
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .section-heading {
+                padding-left: 20px;
+                width: 86%;
+            }
+
+            .section-heading h2 {
+                font-size: 24px;
+            }
+
+            .section-heading p {
+                font-size: 14px;
+            }
+
+            .common-spacing {
+                padding-top: 40px;
+            }
+
+            .footer-part .logo-part {
+                width: 100%;
+            }
+
+            .footer-part .footer-div {
+                width: 100%;
+            }
+
+            .footer-part {
+                gap: 30px;
+            }
+
+            .footer-part .footer-div ul li a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-content">
+        <!-- HEADER PART  -->
+        <header>
+            <nav class="header">
+                <div class="container">
+                    <div class="header-part">
+                        <div class="logo-part">
+                            <a href="#">
+                                <img src="./Kountics-logo.svg" alt="logo" />
+                            </a>
+                        </div>
+
+                        <div class="toggle-button">
+                            <img src="./toggle-btn.svg" alt="toggle-btn" id="toggleIcon" />
+                        </div>
+
+
+                        <ul class="link-part">
+                            <li class="active"><a href="#homeSection">home</a></li>
+                            <li><a href="#servicesSection">services</a></li>
+                            <li><a href="#workSection">how it works</a></li>
+                            <li><a href="#toolsSection">tools</a></li>
+                            <li><a href="#benefitsSection">benefits</a></li>
+                            <li><a href="#contactSection">contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- BANNER SECTION  -->
+        <section class="banner-section" id="homeSection">
+            <div class="container">
+                <div class="theme-card">
+                    <div class="content-part">
+                        <h1>Welcome to KOUNTICS</h1>
+                        <p>At KOUNTICS, we are Accounting, Financial Planning, and Data Experts dedicated to providing
+                            comprehensive analytics solutions tailored to meet the unique needs of medium companies.</p>
+                        <p>Our expertise lies in transforming raw data from various sources into actionable insights
+                            that drive informed decision-making and strategic planning.</p>
+                        <button class="theme-btn" id="contactModal">
+                            Get started
+                            <img src="./right-arrow.svg" alt="right-arrow" />
+                        </button>
+                    </div>
+                    <div class="img-part">
+                        <img src="./banner-img.svg" alt="banner-img" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <div class="form-part">
+                    <span class="close-button" id="closeModal">&times;</span>
+                    <div class="contact-content">
+                        <div class="form-part">
+                            <form>
+                                <div class="form">
+                                    <div class="input-grid">
+                                        <div class="form-input">
+                                            <label for="fname">First Name</label><br>
+                                            <input type="text" id="fname" name="fname" placeholder="First Name">
+                                        </div>
+                                        <div class="form-input">
+                                            <label for="lname">Last Name</label><br>
+                                            <input type="text" id="lname" name="lname" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="input-grid">
+                                        <div class="form-input">
+                                            <label for="email">Email</label><br>
+                                            <input type="email" id="email" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="form-input">
+                                            <label for="phone">Phone </label><br />
+                                            <input type="text" id="phone" name="phone" placeholder="Phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="company">Company</label><br />
+                                        <input type="text" id="company" name="company" placeholder="Company Name">
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="message">Message</label><br />
+                                        <textarea id="message" name="message" rows="3" cols="50"
+                                            placeholder="Message"></textarea>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="agreement" value="agreement">
+                                        <label> You agree to our friendly Privacy Policy.</label>
+                                    </div>
+                                    <button type="submit" class="theme-btn"> send message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SERVICES SECTION  -->
+        <section class="services-section common-spacing" id="servicesSection">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>SERVICES</h2>
+                    <p>Our Comprehensive Analytics Services</p>
+                </div>
+
+                <div class="service-cards">
+                    <div class="service-card theme-card">
+                        <h3>
+                            Standard Capabilities
+                        </h3>
+                        <ul>
+                            <li>Dynamic Forecasting and Projections</li>
+                            <li>Visual Variance Analysis (Budget and Prior Periods)</li>
+                            <li>Cash Flow Forecasting</li>
+                            <li>Payroll / Headcount Reporting</li>
+                            <li>Commissions and Salesforce Performance Analysis</li>
+                            <li>Customer Profitability and Trends Analysis</li>
+                            <li>Customer Data Normalization</li>
+                            <li>Expense normalization and reporting</li>
+                            <li>Inventory changes and product profitability</li>
+                        </ul>
+                    </div>
+                    <div class="service-card theme-card">
+                        <h3>Additional Reports for CFOs</h3>
+                        <ul>
+                            <li>Chart of account rationalization</li>
+                            <li>P&L creation or simplification</li>
+                            <li>Dynamic four-statement model</li>
+                            <li>Working Capital Analysis</li>
+                            <li>Cost Allocation and Cost Center Analysis</li>
+                            <li>Financial Ratio Analysis</li>
+                            <li>Scenario Planning and Sensitivity Analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORK SECTION  -->
+        <section class="work-section common-spacing" id="workSection">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>HOW IT WORKS</h2>
+                    <p>Our Simple and Efficient Process</p>
+                </div>
+                <div class="work-cards">
+                    <div class="work-card">
+                        <div class="content-part">
+                            <div class="number-label ">
+                                1
+                            </div>
+                            <h3>Understand and Develop</h3>
+                            <div>
+                                <p>We meet with you at your convenience.</p>
+                                <p>We talk over your needs / you show us your current output or data.</p>
+                                <p>We agree on outputs that can meet those needs / improve current state.</p>
+                                <p>We iterate over solutions until you are satisfied</p>
+                            </div>
+                        </div>
+                        <div class="img-part">
+                            <img src="./work-img-1.svg" alt="work-img" />
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="content-part">
+                            <div class="number-label">
+                                2
+                            </div>
+                            <h3>Recurring Build</h3>
+                            <div>
+                                <p>Every month you safely and securely share your data with us.</p>
+                                <p>Every month we share back the completed updated reports with you.</p>
+                                <p>We can also train your team to refresh report in the most efficient and
+                                    straightforward manner providing support along the way.</p>
+                            </div>
+                        </div>
+                        <div class="img-part">
+                            <img src="./work-img-2.svg" alt="work-img" />
+                        </div>
+                    </div>
+                    <div class="work-card">
+                        <div class="content-part">
+                            <div class="number-label">
+                                3
+                            </div>
+                            <h3>Continuous Improvement</h3>
+                            <div>
+                                <p>We gather your feedback on the reports and services provided. This helps us
+                                    understand your evolving needs and expectations.</p>
+                                <p>Based on your feedback, we continuously enhance our services.</p>
+                                <p>We ensure our solutions remain aligned with your business goals.</p>
+                            </div>
+                        </div>
+                        <div class="img-part">
+                            <img src="./work-img-3.svg" alt="work-img" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOOLS SECTION  -->
+        <section class="tools-section common-spacing" id="toolsSection">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>TOOLS</h2>
+                    <p>Wide Range of Analytics Tools | Our team utilizes a diverse set of tools to deliver sophisticated
+                        analytics solutions:</p>
+                </div>
+                <div class="common-card-container">
+                    <div class="common-card">
+                        <img src="./excel.png" alt="excel img" />
+                        <h4>Excel</h4>
+                        <p>Installed in most corporate computers, making it easy to create, manipulate, and share
+                            reports.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./powerbi.png" alt="powerbi img" />
+                        <h4>PowerBI</h4>
+                        <p>Microsoft’s analytics tool for advanced data visualization and interactive reports.</p>
+                    </div>
+
+                    <div class="common-card">
+                        <img src="./python.png" alt="python img" />
+                        <h4>Python</h4>
+                        <p>Powerful programming language for data analysis and automation.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./sql_server.png" alt="sql img" />
+                        <h4>SQL Server</h4>
+                        <p>Installed in most corporate computers, making it easy to create, manipulate, and share
+                            reports.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./tableau.png" alt="tableau img" />
+                        <h4>Tableau</h4>
+                        <p>Leading data visualization tool for creating interactive and insightful dashboards. </p>
+                    </div>
+                    <div class="common-card">
+
+                        <h4>More to come</h4>
+                        <p>We’ll add more tools in the future. Stay tuned!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFITS SECTION  -->
+        <section class="benefits-section common-spacing" id="benefitsSection">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Additional Benefits</h2>
+                </div>
+
+                <div class="common-card-container">
+                    <div class="common-card">
+                        <img src="./benefits-img-1.svg" alt="" />
+                        <h4>Data Governance and Quality Assurance</h4>
+                        <p>Ensuring data accuracy and reliability through robust governance practices.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./benefits-img-2.svg" alt="" />
+                        <h4>Data Visualization and Storytelling</h4>
+                        <p>Effectively communicating insights through compelling data visualizations.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./benefits-img-3.svg" alt="" />
+                        <h4>Training and Support</h4>
+                        <p>Providing clients with training sessions and ongoing support for optimal use of analytics
+                            tools.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./benefits-img-4.svg" alt="" />
+                        <h4>Integrating Automation and AI</h4>
+                        <p>Harnessing the power of automation and AI-driven analytics for efficiency and scalability.
+                        </p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./benefits-img-5.svg" alt="" />
+                        <h4>Client Feedback and Continuous Improvement</h4>
+                        <p>Gathering feedback to continuously enhance and refine our analytics services.</p>
+                    </div>
+                    <div class="common-card">
+                        <img src="./benefits-img-6.svg" alt="" />
+                        <h4>Data Security and Compliance</h4>
+                        <p>Upholding strict data security and compliance standards to safeguard client information.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION  -->
+        <section class="contact-section common-spacing" id="contactSection">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Get in Touch with KOUNTICS</h2>
+                    <p>We’d love to hear from you! Whether you have questions about our services, need a consultation,
+                        or want to provide feedback, feel free to reach out to us through the form below or via our
+                        contact details.</p>
+                </div>
+                <div class="contact-content">
+                    <div class="form-part">
+                        <form>
+                            <div class="form">
+                                <div class="input-grid">
+                                    <div class="form-input">
+                                        <label for="fname">First Name</label><br>
+                                        <input type="text" id="fname" name="fname" placeholder="First Name">
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="lname">Last Name</label><br>
+                                        <input type="text" id="lname" name="lname" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="input-grid">
+                                    <div class="form-input">
+                                        <label for="email">Email</label><br>
+                                        <input type="email" id="email" name="email" placeholder="Email">
+                                    </div>
+                                    <div class="form-input">
+                                        <label for="phone">Phone </label><br />
+                                        <input type="text" id="phone" name="phone" placeholder="Phone">
+                                    </div>
+                                </div>
+                                <div class="form-input">
+                                    <label for="company">Company</label><br />
+                                    <input type="text" id="company" name="company" placeholder="Company Name">
+                                </div>
+                                <div class="form-input">
+                                    <label for="message">Message</label><br />
+                                    <textarea id="message" name="message" rows="3" cols="50"
+                                        placeholder="Message"></textarea>
+                                </div>
+
+                                <div>
+                                    <input type="checkbox" name="agreement" value="agreement">
+                                    <label> You agree to our friendly Privacy Policy.</label>
+                                </div>
+                                <button type="submit" class="theme-btn"> send message</button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="img-part">
+                        <img src="./contact.svg" alt="contact img" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER PART  -->
+        <footer class="footer common-spacing">
+            <div class="container">
+                <div class="theme-card">
+                    <div class="footer-part ">
+                        <div class="logo-part footer-div">
+                            <img src="./Kountics-logo.svg" alt="logo" />
+                        </div>
+                        <div class="link part footer-div">
+                            <p class="footer-text">For any immediate inquiriesReach out to us at:</p>
+                            <ul>
+                                <li><a href="#">
+                                        <svg aria-hidden="true" class="e-font-icon-svg e-fas-phone-alt"
+                                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" height="24px"
+                                            width="24px">
+                                            <path fill="#FFFFFF"
+                                                d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z">
+                                            </path>
+                                        </svg>
+                                        <span>+1404-490-3772</span></a>
+                                </li>
+                                <li><a href="#">
+                                        <svg aria-hidden="true" class="e-font-icon-svg e-far-envelope"
+                                            viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" height="24px"
+                                            width="24px">
+                                            <path fill="#FFFFFF"
+                                                d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z">
+                                            </path>
+                                        </svg>
+                                        <span>upport@kountics.com</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="address-part footer-div">
+                            <p class="footer-text">Find Us At</p>
+                            <p class="address-text">PO Box 88152, Atlanta, GA 30356 </p>
+                        </div>
+                        <div class="social-media-part footer-div">
+                            <p class="footer-text">Connect with us onSocial media</p>
+                            <div class="img-part">
+                                <a href="#"><img src="./linkedin-icon.svg" alt="linkedin-icon" /></a>
+                                <a href="#"><img src="./youtube-icon.svg" alt="youtube-icon" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="copy-right-part">
+                        <p>Copyrights 2024 © KOUNTICS.</p>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+        <div class="common-spacing"></div>
+    </div>
+
+
+
+</body>
+
+<script>
+
+    // active link and scroll 
+    function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function smoothScroll(target, duration) {
+        const targetPosition = target.getBoundingClientRect().top;
+        const startPosition = window.pageYOffset;
+        const distance = targetPosition;
+        let startTime = null;
+
+        function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = easeInOutQuad(timeElapsed / duration) * distance + startPosition;
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
+    }
+
+    document.querySelectorAll('.link-part li a').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelectorAll('.link-part li').forEach(li => li.classList.remove('active'));
+
+            this.parentElement.classList.add('active');
+
+            const targetSection = document.querySelector(this.getAttribute('href'));
+            smoothScroll(targetSection, 1000);
+        });
+    });
+
+    document.querySelector('.toggle-button').addEventListener('click', function () {
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (toggleIcon.src.includes('toggle-btn.svg')) {
+            toggleIcon.src = './close-btn.svg';
+        } else {
+            toggleIcon.src = './toggle-btn.svg';
+        }
+
+        document.querySelector('.link-part').classList.toggle('show');
+    });
+
+    // modal 
+    const modal = document.getElementById('modal');
+    const openModalButton = document.getElementById('contactModal');
+    const closeModalButton = document.getElementById('closeModal');
+    openModalButton.addEventListener('click', () => {
+        modal.style.display = 'flex';
+    });
+    closeModalButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+
+</script>
+
+
+
+
+</html>
