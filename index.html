@@ -248,7 +248,7 @@
             margin: -20px 0px;
         }
 
-        .banner-section .theme-btn:hover{
+        .banner-section .theme-btn:hover {
             background-color: #6DC5FF;
         }
 
@@ -495,7 +495,7 @@
             justify-content: center;
         }
 
-        .contact-content .form .theme-btn:hover{
+        .contact-content .form .theme-btn:hover {
             background-color: #247BB4;
         }
 
@@ -582,7 +582,7 @@
             color: var(--secondary);
         }
 
-        .footer-part .footer-div ul li a:hover svg path{
+        .footer-part .footer-div ul li a:hover svg path {
             fill: var(--secondary);
         }
 
@@ -1015,43 +1015,45 @@
                     <span class="close-button" id="closeModal">&times;</span>
                     <div class="contact-content">
                         <div class="form-part">
-                            <form>
+                            <form action="https://formspree.io/f/xanwrdaq" method="POST">
                                 <div class="form">
                                     <div class="input-grid">
                                         <div class="form-input">
                                             <label for="fname">First Name</label><br>
-                                            <input type="text" id="fname" name="fname" placeholder="First Name">
+                                            <input type="text" id="fname" name="fname" placeholder="First Name" required>
                                         </div>
                                         <div class="form-input">
                                             <label for="lname">Last Name</label><br>
-                                            <input type="text" id="lname" name="lname" placeholder="Last Name">
+                                            <input type="text" id="lname" name="lname" placeholder="Last Name" required>
                                         </div>
                                     </div>
                                     <div class="input-grid">
                                         <div class="form-input">
                                             <label for="email">Email</label><br>
-                                            <input type="email" id="email" name="email" placeholder="Email">
+                                            <input type="email" id="email" name="email" placeholder="Email" required>
                                         </div>
                                         <div class="form-input">
                                             <label for="phone">Phone </label><br />
-                                            <input type="text" id="phone" name="phone" placeholder="Phone">
+                                            <input type="tel" id="phone" name="phone" placeholder="Phone" required>
                                         </div>
                                     </div>
                                     <div class="form-input">
                                         <label for="company">Company</label><br />
-                                        <input type="text" id="company" name="company" placeholder="Company Name">
+                                        <input type="text" id="company" name="company" placeholder="Company Name" required>
                                     </div>
                                     <div class="form-input">
                                         <label for="message">Message</label><br />
-                                        <textarea id="message" name="message" rows="3" cols="50"
-                                            placeholder="Message"></textarea>
+                                        <textarea id="message" name="message" rows="3" cols="50" placeholder="Message"
+                                            required></textarea>
                                     </div>
+    
                                     <div>
-                                        <input type="checkbox" name="agreement" value="agreement">
+                                        <input type="checkbox" name="agreement" value="agreement" required>
                                         <label> You agree to our friendly Privacy Policy.</label>
                                     </div>
                                     <button type="submit" class="theme-btn"> send message</button>
                                 </div>
+    
                             </form>
                         </div>
                     </div>
@@ -1265,40 +1267,40 @@
                 </div>
                 <div class="contact-content">
                     <div class="form-part">
-                        <form>
+                        <form action="https://formspree.io/f/xanwrdaq" method="POST">
                             <div class="form">
                                 <div class="input-grid">
                                     <div class="form-input">
                                         <label for="fname">First Name</label><br>
-                                        <input type="text" id="fname" name="fname" placeholder="First Name">
+                                        <input type="text" id="fname" name="fname" placeholder="First Name" required>
                                     </div>
                                     <div class="form-input">
                                         <label for="lname">Last Name</label><br>
-                                        <input type="text" id="lname" name="lname" placeholder="Last Name">
+                                        <input type="text" id="lname" name="lname" placeholder="Last Name" required>
                                     </div>
                                 </div>
                                 <div class="input-grid">
                                     <div class="form-input">
                                         <label for="email">Email</label><br>
-                                        <input type="email" id="email" name="email" placeholder="Email">
+                                        <input type="email" id="email" name="email" placeholder="Email" required>
                                     </div>
                                     <div class="form-input">
                                         <label for="phone">Phone </label><br />
-                                        <input type="text" id="phone" name="phone" placeholder="Phone">
+                                        <input type="tel" id="phone" name="phone" placeholder="Phone" required>
                                     </div>
                                 </div>
                                 <div class="form-input">
                                     <label for="company">Company</label><br />
-                                    <input type="text" id="company" name="company" placeholder="Company Name">
+                                    <input type="text" id="company" name="company" placeholder="Company Name" required>
                                 </div>
                                 <div class="form-input">
                                     <label for="message">Message</label><br />
-                                    <textarea id="message" name="message" rows="3" cols="50"
-                                        placeholder="Message"></textarea>
+                                    <textarea id="message" name="message" rows="3" cols="50" placeholder="Message"
+                                        required></textarea>
                                 </div>
 
                                 <div>
-                                    <input type="checkbox" name="agreement" value="agreement">
+                                    <input type="checkbox" name="agreement" value="agreement" required>
                                     <label> You agree to our friendly Privacy Policy.</label>
                                 </div>
                                 <button type="submit" class="theme-btn"> send message</button>
@@ -1324,7 +1326,7 @@
                         <div class="link part footer-div">
                             <p class="footer-text">For any immediate inquiriesReach out to us at:</p>
                             <ul>
-                                <li><a href="#">
+                                <li><a href="tel: +1-574-367-1936">
                                         <svg aria-hidden="true" class="e-font-icon-svg e-fas-phone-alt"
                                             viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" height="24px"
                                             width="24px">
@@ -1334,7 +1336,7 @@
                                         </svg>
                                         <span>+1404-490-3772</span></a>
                                 </li>
-                                <li><a href="#">
+                                <li><a href="mailto: support@kountics.com">
                                         <svg aria-hidden="true" class="e-font-icon-svg e-far-envelope"
                                             viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" height="24px"
                                             width="24px">
@@ -1342,7 +1344,7 @@
                                                 d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z">
                                             </path>
                                         </svg>
-                                        <span>upport@kountics.com</span></a></li>
+                                        <span>support@kountics.com</span></a></li>
                             </ul>
                         </div>
                         <div class="address-part footer-div">
@@ -1370,7 +1372,7 @@
 
 
 </body>
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SE0VRB0MET"></script>
 <script>
 
     // active link and scroll 
@@ -1436,6 +1438,11 @@
         }
     });
 
+    <!-- Google tag (gtag.js) -->
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SE0VRB0MET');
 
 </script>
 
